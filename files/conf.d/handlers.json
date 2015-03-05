@@ -1,0 +1,12 @@
+{
+  "handlers": {
+    "email": {
+      "type": "pipe",
+      "command": "mail -s 'sensu event' email@address.com"
+    },
+    "elasticsearch": {
+      "type": "pipe",
+      "command": "/etc/sensu/handlers/elasticsearch_metrics.rb"
+    }
+  }
+}
