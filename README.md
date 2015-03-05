@@ -2,7 +2,7 @@ Sensu Server
 ==============
 The Sensu server is responsible for orchestrating check executions, the processing of check results, and event handling.
 
-Depends on: RabbitMQ, Redis
+Depends on: RabbitMQ, Redis, Elasticsearch
 
 Installation
 --------------
