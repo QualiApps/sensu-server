@@ -19,7 +19,7 @@ COPY ./files/conf.d/ /etc/sensu/conf.d/
 COPY ./files/sensu-server.sh /etc/sensu/sensu-server.sh
 
 RUN chmod 700 /etc/sensu/sensu-server.sh
-RUN chmod 700 /etc/sensu/handlers/elasticsearch_metrics.rb
+RUN chmod 755 /etc/sensu/handlers/elasticsearch_metrics.rb
 
 # supervisord
 COPY ./files/supervisord.conf /etc/supervisord.conf

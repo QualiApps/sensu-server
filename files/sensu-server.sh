@@ -25,21 +25,6 @@ cat > /etc/sensu/conf.d/settings.json <<EOF
         "port": $ES_PORT_9200_TCP_PORT,
         "index": "sensu-metrics",
         "timeout": 5
-    },
-    "sensu": [
-        {
-            "name": "Sensu Server",
-            "host": "$ADDRESS",
-            "ssl": false,
-            "port": 4567,
-            "path": "",
-            "timeout": 5000
-        }
-    ],
-    "uchiwa": {
-        "port": 3000,
-        "stats": 10,
-        "refresh": 10000
     }
 }
 EOF

@@ -1,32 +1,32 @@
-{
-  "checks": {
-    "cpu_metrics": {
-      "type": "metric",
-      "command": "/etc/sensu/plugins/system/cpu-pcnt-usage-metrics.rb",
-      "interval": 10,
-      "handlers": ["elasticsearch"],
-      "subscribers": [ "cpu-metrics" ]
-    },
-    "memory_metrics": {
-      "type": "metric",
-      "command": "/etc/sensu/plugins/system/memory-metrics.rb",
-      "interval": 10,
-      "handlers": ["elasticsearch"],
-      "subscribers": [ "memory-metrics" ]
-    },
-    "docker_cpu_metrics": {
-      "type": "metric",
-      "command": "/etc/sensu/plugins/docker/docker-cpu-pcnt-usage-metrics.rb",
-      "interval": 10,
-      "handlers": ["elasticsearch"],
-      "subscribers": [ "docker-cpu-metrics" ]
-    },
-    "docker_memory_metrics": {
-      "type": "metric",
-      "command": "/etc/sensu/plugins/docker/docker-memory-usage-metrics.rb",
-      "interval": 10,
-      "handlers": ["elasticsearch"],
-      "subscribers": [ "docker-memory-metrics" ]
-    }
-  }
+{                                                                                                             
+  "checks": {                                                                                                 
+    "cpu_metrics": {                                                                                          
+      "type": "metric",                                                                                       
+      "command": "/etc/sensu/plugins/system/cpu-pcnt-usage-metrics.rb",                                       
+      "interval": 10,                                                                                         
+      "handlers": ["elasticsearch"],                                                                          
+      "subscribers": [ "cpu-metrics" ]                                                                        
+    },                                                                                                        
+    "memory_metrics": {                                                                                       
+      "type": "metric",                                                                                       
+      "command": "/etc/sensu/plugins/system/memory-metrics.rb",                                               
+      "interval": 10,                                                                                         
+      "handlers": ["elasticsearch"],                                                                          
+      "subscribers": [ "memory-metrics" ]                                                                     
+    },                                                                                                        
+    "docker_cpu_metrics": {                                                                                   
+      "type": "metric",                                                                                       
+      "command": "/etc/sensu/plugins/docker/docker-cpu-pcnt-usage-metrics.rb -c /home/cgroup",
+      "interval": 10,                                                                                         
+      "handlers": ["elasticsearch"],                                                                          
+      "subscribers": [ "docker-cpu-metrics" ]                                                                 
+    },                                                                                                        
+    "docker_memory_metrics": {                                                                                
+      "type": "metric",                                                                                       
+      "command": "/etc/sensu/plugins/docker/docker-memory-usage-metrics.rb -c /home/cgroup",                  
+      "interval": 10,                                                                                         
+      "handlers": ["elasticsearch"],                                                                          
+      "subscribers": [ "docker-memory-metrics" ]                                                              
+    }                                                                                                         
+  }                                                                                                           
 }

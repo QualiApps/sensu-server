@@ -15,7 +15,7 @@ Installation
 Running
 -----------------
 
-`docker run -d -p 3000:3000 -p 4567:4567 --link rabbitmq:rmq --link elasticsearch:es --link redis:redis --name sensuServer qapss/sensu-server`
+`docker run -d -p 3000:3000 -p 4567:4567 --link rabbitmq:rmq --link elasticsearch:es --link redis:redis --name sensuServer qapps/sensu-server`
 
 where:
 
