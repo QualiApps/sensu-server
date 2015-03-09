@@ -32,3 +32,17 @@ How to access via browser
 Uchiwa - is a simple dashboard for the Sensu monitoring framework
 
 `http://your-server:3000/`
+
+
+Enviroments for notification
+-------------------------
+
+`M_GUI` - path to the admin area
+
+`M_FROM` - mail from
+
+`M_TO` - mail to
+
+`SMTP_ADDR` - smpt address
+
+`SMTP_PORT` - smtp port

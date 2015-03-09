@@ -10,18 +10,18 @@ cat > /etc/sensu/conf.d/settings.json <<EOF
         "port": 4567
     },
     "rabbitmq": {
-        "host": "rmq",
+        "host": "$RMQ_PORT_5672_TCP_ADDR",
         "port": $RMQ_PORT_5672_TCP_PORT,
         "vhost": "/",
         "user": "rabbit",
         "password": "rabbit"
     },
     "redis": {
-        "host": "redis",
+        "host": "$REDIS_PORT_6379_TCP_ADDR",
         "port": $REDIS_PORT_6379_TCP_PORT
     },
     "elasticsearch": {
-        "host": "es",
+        "host": "$ES_PORT_9200_TCP_ADDR",
         "port": $ES_PORT_9200_TCP_PORT,
         "index": "sensu-metrics",
         "timeout": 5
@@ -50,7 +50,26 @@ cat > /etc/sensu/uchiwa.json <<EOF
 }
 EOF
 
+# Sets mailer config
+M_GUI=${M_GUI:-http://localhost:3000}
+M_FROM=${M_FROM:-sensu@server.com}
+M_TO=${M_TO:-Yury_Kavaliou@epam.com}
+SMTP_ADDR=${SMTP_ADDR:-localhost}
+SMTP_PORT=${SMTP_PORT:-25}
+
+cat > /etc/sensu/conf.d/mailer.json <<EOF
+{
+    "mailer": {
+        "admin_gui": "$M_GUI",
+        "mail_from": "$M_FROM",
+        "mail_to": "$M_TO",
+        "smtp_address": "$SMTP_ADDR",
+        "smtp_port": $SMTP_PORT
+    }
+}
+EOF
+
 
 
 # Start Supervisord
-/usr/bin/supervisord -c /etc/supervisord.conf
+#/usr/bin/supervisord -c /etc/supervisord.conf

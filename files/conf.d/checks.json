@@ -6,7 +6,19 @@
       "interval": 10,                                                                                         
       "handlers": ["elasticsearch"],                                                                          
       "subscribers": [ "cpu-metrics" ]                                                                        
-    },                                                                                                        
+    },                                                                                    
+    "cpu-check": {
+	"command": "/etc/sensu/plugins/system/check-cpu.rb",
+	"interval": 30,
+	"subscribers": [ "cpu-check" ],
+	"handlers": [ "mailer" ]
+    },                    
+    "ram-check": {
+	"command": "/etc/sensu/plugins/system/check-ram.rb",
+	"interval": 30,
+	"subscribers": [ "ram-check" ],
+	"handlers": [ "mailer" ]
+    }, 
     "memory_metrics": {                                                                                       
       "type": "metric",                                                                                       
       "command": "/etc/sensu/plugins/system/memory-metrics.rb",                                               

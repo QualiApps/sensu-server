@@ -11,17 +11,20 @@ RUN yum install -y sensu \
 	supervisor \
 	uchiwa \
 	&& gem install sensu-plugin \
+	mail \
 	&& rm /etc/sensu/uchiwa.json
 
-COPY ./files/handlers/elasticsearch_metrics.rb /etc/sensu/handlers/elasticsearch_metrics.rb
+COPY ./files/handlers/ /etc/sensu/handlers/
 COPY ./files/conf.d/ /etc/sensu/conf.d/
 
 COPY ./files/sensu-server.sh /etc/sensu/sensu-server.sh
 
-RUN chmod 700 /etc/sensu/sensu-server.sh
-RUN chmod 755 /etc/sensu/handlers/elasticsearch_metrics.rb
+RUN chmod 700 /etc/sensu/sensu-server.sh \
+    && chmod 755 /etc/sensu/handlers/elasticsearch_metrics.rb \
+    && chmod 755 /etc/sensu/handlers/mailer.rb
+
 
 # supervisord
 COPY ./files/supervisord.conf /etc/supervisord.conf
 
-ENTRYPOINT [ "/bin/bash", "/etc/sensu/sensu-server.sh" ]
+#ENTRYPOINT [ "/bin/bash", "/etc/sensu/sensu-server.sh" ]

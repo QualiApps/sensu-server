@@ -1,8 +1,12 @@
 {
   "handlers": {
-    "email": {
+    "mailer": {
       "type": "pipe",
-      "command": "mail -s 'sensu event' email@address.com"
+      "command": "/etc/sensu/handlers/mailer.rb",
+      "severities": [
+        "critical",
+        "warning"
+      ]
     },
     "elasticsearch": {
       "type": "pipe",
