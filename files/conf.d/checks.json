@@ -46,6 +46,13 @@
       "interval": 10,
       "handlers": ["elasticsearch"],
       "subscribers": [ "docker-status-metrics" ]
+    },
+    "docker_processes_metrics": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/docker/docker-processes-metrics.rb -c /home/cgroup",
+      "interval": 10,
+      "handlers": ["elasticsearch"],
+      "subscribers": [ "docker-processes-metrics" ]
     }
   }                                                                                                           
 }

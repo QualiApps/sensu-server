@@ -33,23 +33,28 @@ class ElasticsearchMetrics < Sensu::Handler
     Digest::MD5.new.update rdm
   end
 
-  def time_stamp(time)
+  def time_stamp_old(time)
     Time.at(time.to_i).strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+  end
+
+  def time_stamp()
+    DateTime.now.to_s
   end
 
   def handle
     @event['check']['output'].split("\n").each do |line|
       item = line.split " "
       metrics = {
-        :@timestamp => time_stamp(item[2]),
+        :@timestamp => time_stamp,
         client: @event['client']['name'],
         check_name: @event['check']['name'],
         status: @event['check']['status'],
         address: @event['client']['address'],
         command: @event['check']['command'],
         occurrences: @event['occurrences'],
-        key: item[0],
-        value: item[1].to_i
+        filter: (item.length == 4) ? item[0].to_s : '-',
+        key: (item.length == 4) ? item[1].to_s : item[0],
+        value: (item.length == 4) ? item[2].to_i : item[1].to_i
       }
 
       begin
