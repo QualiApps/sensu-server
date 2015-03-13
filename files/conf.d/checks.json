@@ -19,6 +19,12 @@
 	"subscribers": [ "ram-check" ],
 	"handlers": [ "mailer" ]
     }, 
+    "disk-check": {
+	"command": "/etc/sensu/plugins/system/check-disk.py",
+	"interval": 30,
+	"subscribers": [ "disk-check" ],
+	"handlers": [ "mailer" ]
+    }, 
     "memory_metrics": {                                                                                       
       "type": "metric",                                                                                       
       "command": "/etc/sensu/plugins/system/memory-metrics.rb",                                               
@@ -53,6 +59,13 @@
       "interval": 10,
       "handlers": ["elasticsearch"],
       "subscribers": [ "docker-processes-metrics" ]
+    },
+    "disk_metrics": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/system/disk-usage-metrics.py",
+      "interval": 10,
+      "handlers": ["elasticsearch"],
+      "subscribers": [ "disk-metrics" ]
     }
   }                                                                                                           
 }
