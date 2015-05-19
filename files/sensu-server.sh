@@ -7,23 +7,23 @@ cat > /etc/sensu/conf.d/settings.json <<EOF
 {
     "api": {
         "host": "$ADDRESS",
-        "port": 4567
+        "port": ${SENSU_PORT:-4567}
     },
     "rabbitmq": {
-        "host": "$RMQ_PORT_5672_TCP_ADDR",
-        "port": $RMQ_PORT_5672_TCP_PORT,
-        "vhost": "/",
-        "user": "rabbit",
-        "password": "rabbit"
+        "host": "${FEED_NAME:-feed}",
+        "port": ${FEED_PORT:-5672},
+        "vhost": "${RMQ_VHOST:-/}",
+        "user": "${RMQ_USER:-rabbit}",
+        "password": "${RMQ_PASS:-rabbit}"
     },
     "redis": {
-        "host": "$REDIS_PORT_6379_TCP_ADDR",
-        "port": $REDIS_PORT_6379_TCP_PORT
+        "host": "${REDIS_NAME:-metricdb}",
+        "port": ${REDIS_PORT:-6379}
     },
     "elasticsearch": {
-        "host": "$ES_PORT_9200_TCP_ADDR",
-        "port": $ES_PORT_9200_TCP_PORT,
-        "index": "sensu-metrics",
+        "host": "${ES_NAME:-db}",
+        "port": ${ES_PORT:-9200},
+        "index": "${DB_INDEX_NAME:-sensu-metrics}",
         "timeout": 5
     }
 }
@@ -37,13 +37,13 @@ cat > /etc/sensu/uchiwa.json <<EOF
             "name": "Sensu Server",
             "host": "$ADDRESS",
             "ssl": false,
-            "port": 4567,
+            "port": ${SENSU_PORT:-4567},
             "path": "",
             "timeout": 5000
         }
     ],
     "uchiwa": {
-        "port": 3000,
+        "port": ${UCHIWA_PORT:-3000},
         "stats": 10,
         "refresh": 10000
     }
@@ -53,7 +53,7 @@ EOF
 # Sets mailer config
 M_GUI=${M_GUI:-http://localhost:3000}
 M_FROM=${M_FROM:-sensu@server.com}
-M_TO=${M_TO:-Yury_Kavaliou@epam.com}
+M_TO=${M_TO:-yury_kavaliou@epam.com}
 SMTP_ADDR=${SMTP_ADDR:-localhost}
 SMTP_PORT=${SMTP_PORT:-25}
 
@@ -68,8 +68,6 @@ cat > /etc/sensu/conf.d/mailer.json <<EOF
     }
 }
 EOF
-
-
 
 # Start Supervisord
 /usr/bin/supervisord -c /etc/supervisord.conf
