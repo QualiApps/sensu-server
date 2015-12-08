@@ -21,7 +21,7 @@ cat > /etc/sensu/conf.d/settings.json <<EOF
         "port": ${REDIS_PORT:-6379}
     },
     "elasticsearch": {
-        "host": "${ES_NAME:-db}",
+        "host": "${ES_NAME:-pss-db}",
         "port": ${ES_PORT:-9200},
         "index": "${DB_INDEX_NAME:-sensu-metrics}",
         "timeout": 5
